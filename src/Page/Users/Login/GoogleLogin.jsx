@@ -1,19 +1,19 @@
 /** @format */
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 
-const Register = () => {
+const GoogleLogin = () => {
   const [error, setError] = useState({});
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
-  const { googleSignIn } = useAuth();
+  const { googleSignUp } = useAuth();
 
-  const handleGoogleSignin = (e) => {
+  const handleGoogleLogin = (e) => {
     e.preventDefault();
     setError({});
     setLoader(false);
@@ -31,7 +31,7 @@ const Register = () => {
 
     if (email && password) {
       setLoader(true);
-      googleSignIn(email, password)
+      googleSignUp(email, password)
         .then(() => {
           navigate("/");
         })
@@ -47,15 +47,15 @@ const Register = () => {
   return (
     <div className="md:w-1/2 mx-auto bg-base-100 rounded-md shadow-inner p-4 min-h-screen mt-10">
       <div className="flex items-center justify-between ">
-        <h1 className="title">Welcome register with your email</h1>
+        <h1 className="title">Welcome Back, Login with your email</h1>
         <span className="cursor-pointer">
-          <Link to="/login/google">
+          <Link to="/login">
             <FaTimes />
           </Link>
         </span>
       </div>
       <form
-        onSubmit={handleGoogleSignin}
+        onSubmit={handleGoogleLogin}
         className="flex flex-col md:justify-between h-4/5 mt-10 space-y-6"
       >
         <div>
@@ -98,9 +98,9 @@ const Register = () => {
 
         <div>
           <p className="text-green-600 font-bold">
-            Already have an account, please
-            <Link to="/login/google" className="hover:underline font-bold px-2">
-              Login
+            New Here, please
+            <Link to="/register" className="hover:underline font-bold px-2">
+              Register
             </Link>
           </p>
         </div>
@@ -113,7 +113,7 @@ const Register = () => {
           {loader ? (
             <span className="loading loading-bars loading-sm text-green-700"></span>
           ) : (
-            "Register"
+            "Login"
           )}
         </button>
       </form>
@@ -121,4 +121,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default GoogleLogin;
