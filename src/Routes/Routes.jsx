@@ -13,11 +13,9 @@ import Layouts from "../Layouts/Layouts";
 import Login from "../Page/Users/Login/Login";
 import Register from "../Page/Users/Register/Register";
 import GoogleLogin from "../Page/Users/Login/GoogleLogin";
-import Profile from "../Page/Users/Profile/Profile";
-import MyOrder from "../Page/Users/Profile/userInfo/myOrder";
-import ShortlistedVehicles from "../Page/Users/Profile/userInfo/ShortlistedVehicles";
-import MyVehicles from "../Page/Users/Profile/userInfo/myVehicles";
-import ProfileSettings from "../Page/Users/Profile/userInfo/ProfileSettings";
+import UsedCarFilter from "../Page/UsedCar/UsedCarFilter/UsedCarFilter";
+import AdminRoutes from "./AdminRoutes";
+import UserRoutes from "./UserRoutes";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: "/usedCar",
         element: <UsedCar></UsedCar>,
+      },
+      {
+        path: "/usedCarFilter",
+        element: <UsedCarFilter />,
       },
       {
         path: "/sellCar",
@@ -71,28 +73,7 @@ const router = createBrowserRouter([
     path: "home",
     element: <HomeLayouts></HomeLayouts>,
   },
-  {
-    path: 'userProfile',
-    element: <Profile></Profile>,
-    children: [
-      {
-        path:'myOrder',
-        element:<MyOrder></MyOrder>
-      },
-      {
-        path:'ShortlistedVehicles',
-        element:<ShortlistedVehicles></ShortlistedVehicles>
-      },
-      {
-        path:'MyVehicles',
-        element:<MyVehicles></MyVehicles>
-      },
-      {
-        path:'ProfileSettings',
-        element:<ProfileSettings></ProfileSettings>
-      },
-      
-    ]
-  }
+  AdminRoutes,
+  UserRoutes,
 ]);
 export default router;

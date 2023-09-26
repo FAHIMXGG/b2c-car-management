@@ -1,9 +1,32 @@
 import React from 'react';
+import UsedCarCover from './Sections/UsedCarCover';
+import BrowseByMake from './Sections/BrowseByMake';
+import BrowseByBody from './Sections/BrowseByBody';
+import Ads from '../../Layouts/Sections/Ads';
+import Reviews from '../../Layouts/Sections/Reviews';
+import FooterCoaver from '../../Layouts/Sections/FooterCoaver';
+import UsedCardByCity from './Sections/UsedCardByCity';
+import TrustedUsedCarByFuel from './Sections/TrustedUsedCarByFuel';
+import UpcomingCar from './Sections/UpcomingCar';
+import NewCar from './Sections/NewCar';
 
 const UsedCar = () => {
     return (
         <div>
-            <h1>used cars</h1>
+            <div className='mb-20'>
+                <UsedCarCover />
+            </div>
+            <UsedCardByCity />
+            <BrowseByMake />
+            <TrustedUsedCarByFuel />
+            <UpcomingCar/>
+            <NewCar/>
+            <BrowseByBody />
+            <Ads />
+            <div className='mt-10'>
+                <Reviews />
+            </div>
+            <FooterCoaver />
         </div>
     );
 };

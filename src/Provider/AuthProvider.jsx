@@ -9,6 +9,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPhoneNumber,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import app from "../firebase/firebase.config";
 
@@ -17,9 +18,10 @@ export const AuthContext = createContext(null);
 const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
-  // private route
   const [user, setUser] = useState(null);
-  // set loading
+
+  const testRole = { name: "Shajib", role: "admin" }; //TODO: check role from DB
+
   const [loading, setLoading] = useState(true);
 
   // create reCaptcha
@@ -33,6 +35,14 @@ const AuthProvider = ({ children }) => {
   //   return signInWithPhoneNumber(auth, number, recaptchaVerifier);
   // };
 
+  const updateUserProfile = (name, photo = null) => {
+    setLoading(true);
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: photo,
+    });
+  };
+
   const googleSignUp = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
@@ -43,7 +53,6 @@ const AuthProvider = ({ children }) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
-  // logout
   const logOut = () => {
     setLoading(true);
     return signOut(auth);
@@ -53,8 +62,10 @@ const AuthProvider = ({ children }) => {
     user,
     logOut,
     loading,
+    updateUserProfile,
     googleSignUp,
     googleSignIn,
+    testRole,
   };
 
   // private route
