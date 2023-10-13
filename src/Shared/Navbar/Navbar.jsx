@@ -1,14 +1,15 @@
-/** @format */
-
 import React from "react";
 import { Link } from "react-router-dom";
 import { BiSearch } from "react-icons/bi";
 import { FaSignOutAlt } from "react-icons/fa";
 import "./../css/custom.css";
 import useAuth from "../../hooks/useAuth";
+import useCurrentUser from "../../hooks/useCurrentUser";
 
 const Navbar = () => {
-  const { user, logOut, testRole } = useAuth();
+  const { user, logOut } = useAuth();
+
+  const { currentUser } = useCurrentUser();
 
   const handleLogOut = () => {
     logOut();
@@ -56,13 +57,27 @@ const Navbar = () => {
         <div className="gap-3 items-center flex justify-center">
           {user ? (
             <div className="center-itm gap-3">
-              <Link to={`/dashboard/${testRole?.role}`} className="btn-details">
-                Dashboard
-              </Link>
+              {currentUser?.role && (
+                <Link
+                  to={`/dashboard/${currentUser?.role}`}
+                  className="btn-details"
+                >
+                  Dashboard
+                </Link>
+              )}
               {user?.photoURL ? (
-                <img src={user?.photoURL} alt="user_photo" />
+                <img
+                  src={user?.photoURL}
+                  alt="user_photo"
+                  className="w-12 h-12 rounded-full"
+                />
               ) : (
-                <p className="btn-details">{user?.displayName}</p>
+                user &&
+                currentUser?.name && (
+                  <p className="btn-details">
+                    {currentUser?.name || user?.displayName}
+                  </p>
+                )
               )}
             </div>
           ) : (

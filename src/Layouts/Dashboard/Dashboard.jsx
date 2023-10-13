@@ -1,11 +1,8 @@
-/** @format */
-
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import {
   PiArrowFatLinesRightFill,
   PiArrowFatLinesLeftFill,
 } from "react-icons/pi";
-import { BiSolidHomeCircle } from "react-icons/bi";
 import { useRef, useState } from "react";
 import AdminLinks from "./GroupDash/Admin/AdminLinks";
 import UserLinks from "./GroupDash/User/UserLinks";
@@ -13,15 +10,17 @@ import useAuth from "../../hooks/useAuth";
 import UpdateProfile from "./Modal/UpdateProfile";
 import UpdateProfileModal from "./Modal/UpdateProfileModal";
 import SendMsgModal from "./Modal/SendMsgModal";
+import WelcomeUser from "./WelcomeUser/WelcomeUser";
+import useCurrentUser from "../../hooks/useCurrentUser";
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
   const modalRef = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
   const [isSupportModalOpen, setIsSupportModalOpen] = useState(false);
-  const { testRole, user } = useAuth();
-
-  console.log(isReportModalOpen, isSupportModalOpen);
+  const { user } = useAuth();
+  const { currentUser, refetch } = useCurrentUser();
+  const { role } = currentUser;
 
   const openModal = (action) => {
     if (action === "report") {
@@ -44,9 +43,10 @@ const Dashboard = () => {
 
   return (
     <>
+      <WelcomeUser />
       <div className="drawer lg:drawer-open h-full">
         <input id="admin_drawer" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col items-center justify-center px-10 bg-gradient-to-r from-[#F2F2F2] to-[#dbfde8]">
+        <div className="drawer-content flex flex-col items-center justify-start px-7 bg-gradient-to-r from-[#F2F2F2] to-[#dbfde8]">
           <Outlet />
           <label
             onClick={() => setIsOpen(true)}
@@ -60,10 +60,10 @@ const Dashboard = () => {
         </div>
         {/* link content */}
         <div className="drawer-side">
-          <div className="menu flex flex-col justify-between w-80 min-h-full bg-base-200 relative pl-8 pt-8">
+          <div className="menu flex flex-col justify-between w-80 min-h-full bg-base-200 relative md:px-8 px-4 pt-0">
             <div className="space-y-2 flex flex-col gap-3">
-              <div className="center-itm justify-center flex-col gap-3">
-                <div className="w-40 h-40 rounded-full border border-green-500 relative">
+              <div className="center-itm justify-center flex-col gap-3 pt-10">
+                <div className="w-24 h-24 rounded-full border border-green-500 relative">
                   <img
                     src={
                       user?.photoURL
@@ -77,17 +77,17 @@ const Dashboard = () => {
                   <UpdateProfile openModal={openModal} />
                 </div>
                 <div className="relative w-fit">
-                  <h2 className="title">{user?.displayName}</h2>
+                  <h2 className="title">{currentUser?.name || "JOhn_Doe"}</h2>
                   <p className="absolute top-0 -right-10 text-green-600 font-semibold">
-                    {testRole?.role}
+                    {role || ""}
                   </p>
                 </div>
               </div>
 
-              {testRole?.role === "admin" ? (
+              {role === "admin" ? (
                 <AdminLinks sendReport={openModal} sendSupport={openModal} />
               ) : (
-                testRole?.role === "user" && <UserLinks />
+                role === "user" && <UserLinks />
               )}
             </div>
 
@@ -102,9 +102,6 @@ const Dashboard = () => {
                 <PiArrowFatLinesLeftFill className="text-white" />
               </span>
             </label>
-            <Link to="/">
-              <BiSolidHomeCircle className="text-5xl text-green-600" />
-            </Link>
           </div>
         </div>
       </div>
@@ -112,6 +109,8 @@ const Dashboard = () => {
         ref={modalRef}
         close={closeModal}
         open={isModalOpen}
+        currentUser={currentUser}
+        refetch={refetch}
       />
       <SendMsgModal
         title="Report your opinion here..."
