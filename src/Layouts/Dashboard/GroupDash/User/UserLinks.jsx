@@ -6,6 +6,9 @@ import { HiOutlineBanknotes } from "react-icons/hi2";
 import { BsBookmarkHeart } from "react-icons/bs";
 import { AiOutlineTransaction } from "react-icons/ai";
 import { IoGitCompare } from "react-icons/io5";
+import { MdOutlineSell } from 'react-icons/md';
+import { BsFillBookmarkCheckFill, BsFillCartCheckFill } from 'react-icons/bs';
+import { FaCartFlatbed } from 'react-icons/fa6';
 
 const UserLinks = () => {
   return (
@@ -13,8 +16,11 @@ const UserLinks = () => {
       <ActiveDashLink to="/dashboard/user/home">
         <MdOutlineCarRepair className="text-2xl" /> Home
       </ActiveDashLink>
+      <ActiveDashLink to="/dashboard/user/my_cart">
+        <FaCartFlatbed className="text-2xl" /> My Cart
+      </ActiveDashLink>
       <ActiveDashLink to="/dashboard/user/order_summary">
-        <MdOutlineCarRental className="text-2xl" /> Order Summary
+        <BsFillCartCheckFill className="text-2xl" /> Order Summary
       </ActiveDashLink>
       <ActiveDashLink to="/dashboard/user/my_bids_list">
         <BiDetail className="text-2xl" />
@@ -38,6 +44,14 @@ const UserLinks = () => {
       <ActiveDashLink to="/dashboard/user/compare_car">
         <IoGitCompare className="text-2xl" />
         Compare Car
+      </ActiveDashLink>
+      <ActiveDashLink to="/dashboard/user/user_sell_car">
+        <MdOutlineSell className="text-2xl" />
+        Sell A Car
+      </ActiveDashLink>
+      <ActiveDashLink to="/dashboard/user/user_listing">
+        <BsFillBookmarkCheckFill className="text-2xl" />
+        My listing
       </ActiveDashLink>
     </>
   );

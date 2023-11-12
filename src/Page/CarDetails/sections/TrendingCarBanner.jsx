@@ -16,7 +16,7 @@ const CarsLayout = () => {
   );
 };
 
-const TrendingCarBanner = () => {
+const TrendingCarBanner = ({carName}) => {
   const [showMore, setShowMore] = useState([1, 2, 3, 4, 5]);
   const [option, setOption] = useState("A");
   const handleOptionSelect = (op) => {
@@ -25,7 +25,7 @@ const TrendingCarBanner = () => {
 
   return (
     <div className="border-x-2 shadow-md p-4 mt-5 rounded-md">
-      <h2 className="title">Trending Maruti Cars</h2>
+      <h2 className="title">Trending {carName} Cars</h2>
       <div className="center-itm justify-between mt-8">
         <button
           onClick={() => handleOptionSelect("A")}
@@ -46,10 +46,10 @@ const TrendingCarBanner = () => {
           All cars
         </button>
       </div>
-      <hr className="border-1 md:border-2" />
+      <hr className="border-1" />
       <div>
-        {showMore.map((itm) => (
-          <CarsLayout key={itm} />
+        {showMore.map((itm,idx) => (
+          <CarsLayout key={idx} />
         ))}
       </div>
       <hr className="border-2 my-4" />

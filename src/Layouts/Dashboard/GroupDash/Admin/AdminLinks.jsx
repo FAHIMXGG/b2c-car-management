@@ -5,9 +5,10 @@ import {
 } from "react-icons/md";
 import { FaChartLine, FaLuggageCart } from "react-icons/fa";
 import { TbReportMoney } from "react-icons/tb";
-import { BsCardChecklist } from "react-icons/bs";
+import { BsCardChecklist, BsMinecartLoaded } from "react-icons/bs";
 import { BiSupport } from "react-icons/bi";
 import { AiFillCar } from "react-icons/ai";
+import { FiSettings } from "react-icons/fi";
 import ActiveDashLink from "../../ActiveDashLink";
 
 const AdminLinks = ({ sendReport, sendSupport }) => {
@@ -16,19 +17,25 @@ const AdminLinks = ({ sendReport, sendSupport }) => {
       <ActiveDashLink to="/dashboard/admin/analytics">
         <FaChartLine className="text-2xl text-green-600" /> Analytics
       </ActiveDashLink>
+      <ActiveDashLink to="/dashboard/admin/order_management">
+        <BsMinecartLoaded className="text-2xl text-green-600" />Manage Order
+      </ActiveDashLink>
 
-      <ActiveDashLink to="/dashboard/admin/seller_update">
+      {/* <ActiveDashLink to="/dashboard/admin/seller_update">
         <TbReportMoney className="text-2xl text-green-600" /> Seller Update
+      </ActiveDashLink> */}
+      <ActiveDashLink to="/dashboard/admin/manage_seller_car">
+        <FiSettings className="text-2xl text-green-600" /> Manage Seller Car
       </ActiveDashLink>
 
       <ActiveDashLink to="/dashboard/admin/upcoming_car">
         <AiFillCar className="text-2xl text-green-600" /> Upcoming Car
       </ActiveDashLink>
 
-      <ActiveDashLink to="/dashboard/admin/used_car">
+      {/* <ActiveDashLink to="/dashboard/admin/used_car">
         <FaLuggageCart className="text-2xl text-green-600" />
         Used Car
-      </ActiveDashLink>
+      </ActiveDashLink> */}
 
       <ActiveDashLink to="/dashboard/admin/add_new_car">
         <MdOutlineCarRepair className="text-2xl text-green-600" /> Add New Car

@@ -1,7 +1,7 @@
 import { Navigate, createBrowserRouter } from "react-router-dom";
 import HomeLayouts from "../Layouts/HomeLayouts";
 import ErrorPage from "../Page/ErrorPage/ErrorPage";
-import NewCar from "../Page/NewCar/NewCar";
+import AllNewCars from "../Page/NewCar/AllNewCars";
 import UsedCar from "../Page/UsedCar/UsedCar";
 import SellCar from "../Page/SellCar/SellCar";
 import CompareCars from "../Page/CompareCars/CompareCars";
@@ -14,6 +14,9 @@ import GoogleLogin from "../Page/Users/Login/GoogleLogin";
 import UsedCarFilter from "../Page/UsedCar/UsedCarFilter/UsedCarFilter";
 import AdminRoutes from "./AdminRoutes";
 import UserRoutes from "./UserRoutes";
+import UpcomingCar from "../Page/UsedCar/Sections/UpcomingCar";
+import CarDetails from "../Page/CarDetails/CarDetails";
+import TestWork from "../utils/TestWork";
 
 const router = createBrowserRouter([
   {
@@ -26,27 +29,35 @@ const router = createBrowserRouter([
         element: <Navigate to="/home"></Navigate>,
       },
       {
-        path: "/newCar",
-        element: <NewCar></NewCar>,
+        path: "/new_car",
+        element: <AllNewCars/>
       },
       {
-        path: "/usedCar",
+        path: "/new_car/details/:id",
+        element: <CarDetails/>
+      },
+      {
+        path: "/upcoming",
+        element: <UpcomingCar loader={true}/>,
+      },
+      {
+        path: "/used_car",
         element: <UsedCar></UsedCar>,
       },
       {
-        path: "/usedCarFilter",
+        path: "/used_car_filter",
         element: <UsedCarFilter />,
       },
       {
-        path: "/sellCar",
+        path: "/sell_car",
         element: <SellCar></SellCar>,
       },
       {
-        path: "/compareCar",
+        path: "/compare_car",
         element: <CompareCars></CompareCars>,
       },
       {
-        path: "/newsAndReview",
+        path: "/news_and_review",
         element: <NewsAndReview></NewsAndReview>,
       },
       {
@@ -64,6 +75,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+      {
+        path: "/test",
+        element: <TestWork></TestWork>,
       },
     ],
   },

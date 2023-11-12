@@ -8,6 +8,10 @@ import CompareCar from "../Layouts/Dashboard/GroupDash/User/Sections/CompareCar"
 import MyBidsList from "../Layouts/Dashboard/GroupDash/User/Sections/MyBidsList";
 import EMICalculator from "../Layouts/Dashboard/GroupDash/User/Sections/EMICalculator";
 import UserHome from "../Layouts/Dashboard/GroupDash/User/Sections/UserHome";
+import UserSellCar from "../Layouts/Dashboard/GroupDash/User/Sections/UserSellCar";
+import UserListing from "../Layouts/Dashboard/GroupDash/User/Sections/UserListing";
+import PrivateRoute from "./PrivateRoute";
+import MyCart from "../Layouts/Dashboard/GroupDash/User/Sections/MyCart";
 
 const UserRoutes = {
   path: "/dashboard/user",
@@ -48,6 +52,18 @@ const UserRoutes = {
     {
       path: "/dashboard/user/compare_car",
       element: <CompareCar />,
+    },
+    {
+      path: "/dashboard/user/user_sell_car",
+      element: <PrivateRoute><UserSellCar /></PrivateRoute>,
+    },
+    {
+      path: "/dashboard/user/user_listing",
+      element: <UserListing />,
+    },
+    {
+      path: "/dashboard/user/my_cart",
+      element: <MyCart/>,
     },
   ],
 };
